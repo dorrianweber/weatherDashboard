@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link for BootStrap -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- Link for CSS file -->
+    <link rel="stylesheet" href="./assets/css/style.css"/>
+    <title>Weather Dashboard</title>
+</head>
+
+<body>
+    <header class="container-fluid">
+        <header class="row" id="page-header">
+            <header class="col offset-4">
+                <h1>Weather Dashboard</h1>
+            </header>
+        </header>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row" id="city-search">
+            <div class="col-4">
+                <h3>Search for a City:</h3>
+            </div>
+
+            <div class="col-8">
+                <div class="row" id="today-weather">
+                    <h3>This is where the current day's forecast will go.</h3>
+                </div>
+
+                <div class="row" id="forecast">
+                    <h3>5-Day Forecast:</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Link for jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Link for JavaScript file -->
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>

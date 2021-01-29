@@ -1,0 +1,22 @@
+#page-header {
+    background-color: black;
+    color: white;
+}
+
+#city-search {
+    width: 30%;
+    height: 100%;
+    border: black;
+}
+
+#today-weather {
+    height: 60%;
+    width: 70%;
+    border: black;
+}
+
+#forecast {
+    height: 40%;
+    width: 70%;
+    border: black;
+}
