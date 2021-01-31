@@ -4,19 +4,32 @@
 }
 
 #city-search {
-    width: 30%;
-    height: 100%;
-    border: black;
+    border: black solid 2px;
+    padding: 20px;
 }
 
 #today-weather {
     height: 60%;
-    width: 70%;
-    border: black;
+    border: black solid 2px;
+    padding: 20px;
+}
+
+#today-weather h3::after  {
+    content: '\A';
+    white-space: pre;
 }
 
 #forecast {
     height: 40%;
-    width: 70%;
-    border: black;
+    border: black solid 2px;
+    padding: 20px;
+}
+
+input {
+    margin-bottom: 10px;
+}
+
+.city-list {
+    border: black solid 2px;
+    padding: 10px;
 }
