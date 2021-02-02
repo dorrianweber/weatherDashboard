@@ -13,6 +13,8 @@
 </head>
 
 <body>
+
+    <!-- Page header section -->
     <header class="container-fluid">
         <header class="row" id="page-header">
             <header class="col offset-4">
@@ -21,15 +23,23 @@
         </header>
     </header>
 
+    <!-- City search section -->
     <div class="container-fluid">
         <div class="col-4 float-left"  id="city-search">
+
+            <!-- Empty <div> to hold error message if user inputs invalid city name -->
+            <div class="search-error"></div>
+
             <h3>Search for a City:</h3>
+
+            <!-- Search bar & submit button -->
             <input type="text" placeholder="Search.." name="search">
             <button type="submit" id="searchBtn"><i class="fa fa-search"></i></button>
         </div>
 
         <div class="col-8 float-right">
             
+            <!-- Current weather section -->
             <div id="today-weather">
                 <h3 id="today-city-date">City name & date</h3>
                 <h6 id="temp">Temperature: </h6>
@@ -38,6 +48,7 @@
                 <h6 id="uv">UV Index: </h6>
             </div>
 
+            <!-- 5-day forecast section -->
             <div id="forecast-section">
                 <h3 class="col-12">5-Day Forecast:</h3>
                 <div class="row" id="forecast"></div>
