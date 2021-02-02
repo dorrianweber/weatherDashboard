@@ -14,11 +14,6 @@
     padding: 20px;
 }
 
-#today-weather h3::after  {
-    content: '\A';
-    white-space: pre;
-}
-
 #forecast-section {
     height: 40%;
     border: black solid 2px;
@@ -36,4 +31,8 @@ input {
 
 .float-right {
     padding: 0px;
+}
+
+.uvInfo {
+    width: fit-content;
 }

@@ -56,7 +56,37 @@ $("#searchBtn").click(function (){
                 console.log(forecast);
 
                 // Populates current UV Index
-                $("#uv").text("UV Index: " + forecast.daily[0].uvi);
+
+                var uvIcon = $("<div>").addClass("uvInfo").text(forecast.daily[0].uvi);
+
+                // Conditional to set appropriate color for UV intensity
+                if (parseInt(forecast.daily[0].uvi) < 3) {
+                    uvIcon.css("background-color", "green");
+                    uvIcon.css("color", "white");
+                }
+
+                else if (parseInt(forecast.daily[0].uvi) >= 3 && parseInt(forecast.daily[0].uvi) < 6) {
+                    uvIcon.css("background-color", "yellow");
+                }
+
+                else if (parseInt(forecast.daily[0].uvi) >= 6 && parseInt(forecast.daily[0].uvi) < 8) {
+                    uvIcon.css("background-color", "orange");
+                    uvIcon.css("color", "white");
+                }
+
+                else if (parseInt(forecast.daily[0].uvi) >= 8 && parseInt(forecast.daily[0].uvi) < 11) {
+                    uvIcon.css("background-color", "red");
+                    uvIcon.css("color", "white");
+                }
+                
+                else {
+                    uvIcon.css("background-color", "purple");
+                    uvIcon.css("color", "white");
+                }
+                
+                $("#uvArea").empty();
+
+                $("#uvArea").append(uvIcon);
                 
                 // Adds UV Index & daily forecast data to object in local storage
                 data = {
@@ -113,7 +143,37 @@ $("body").on("click", ".city-list", function(){
     $("#wind").text("Wind Speed: " + cityData.wind.speed + " mph");
 
     // Populates current UV Index
-    $("#uv").text("UV Index: " + cityData.uvi);
+
+    var uvIcon = $("<div>").addClass("uvInfo").text(cityData.daily[0].uvi);
+
+    // Conditional to set appropriate color for UV intensity
+    if (parseInt(cityData.daily[0].uvi) < 3) {
+        uvIcon.css("background-color", "green");
+        uvIcon.css("color", "white");
+    }
+
+    else if (parseInt(cityData.daily[0].uvi) >= 3 && parseInt(cityData.daily[0].uvi) < 6) {
+        uvIcon.css("background-color", "yellow");
+    }
+
+    else if (parseInt(cityData.daily[0].uvi) >= 6 && parseInt(cityData.daily[0].uvi) < 8) {
+        uvIcon.css("background-color", "orange");
+        uvIcon.css("color", "white");
+    }
+
+    else if (parseInt(cityData.daily[0].uvi) >= 8 && parseInt(cityData.daily[0].uvi) < 11) {
+        uvIcon.css("background-color", "red");
+        uvIcon.css("color", "white");
+    }
+    
+    else {
+        uvIcon.css("background-color", "purple");
+        uvIcon.css("color", "white");
+    }
+    
+    $("#uvArea").empty();
+
+    $("#uvArea").append(uvIcon);
 
     // .................................................................................................
 
