@@ -58,10 +58,11 @@ $("#searchBtn").click(function (){
                 // Populates current UV Index
                 $("#uv").text("UV Index: " + forecast.daily[0].uvi);
                 
-                // Adds UV Index data to object in local storage
+                // Adds UV Index & daily forecast data to object in local storage
                 data = {
                     ...data,
-                    uvi: forecast.daily[0].uvi
+                    uvi: forecast.daily[0].uvi,
+                    daily: forecast.daily
                 };
 
                 // Saves weather data for city in local storage
@@ -78,15 +79,16 @@ $("#searchBtn").click(function (){
 
                     var forecastDate = $("<h4>").text(moment().add(i, 'days').format("MM/DD/YY"));
                     
-                    var forecastTemp = $("<p>").text("Temperature: old");
+                    var forecastHigh = $("<p>").text("High: " + forecast.daily[i].temp.max + "\u00B0" + "F");
 
-                    var forecastHumidity = $("<p>").text("Humidity: old");
+                    var forecastLow = $("<p>").text("Low: " + forecast.daily[i].temp.min + "\u00B0" + "F");
 
-                    forecastCard.append(forecastDate, forecastTemp, forecastHumidity);
+                    var forecastHumidity = $("<p>").text("Humidity: " + forecast.daily[i].humidity + "%");
+
+                    forecastCard.append(forecastDate, forecastHigh, forecastLow, forecastHumidity);
                 };
-                
             });
-        }
+        };
     });
 });
 
@@ -127,12 +129,14 @@ $("body").on("click", ".city-list", function(){
         $("#forecast").append(forecastCard);
 
         var forecastDate = $("<h4>").text(moment().add(i, 'days').format("MM/DD/YY"));
-        
-        var forecastTemp = $("<p>").text("Temperature: new");
+                    
+        var forecastHigh = $("<p>").text("High: " + cityData.daily[i].temp.max + "\u00B0" + "F");
 
-        var forecastHumidity = $("<p>").text("Humidity: new");
+        var forecastLow = $("<p>").text("Low: " + cityData.daily[i].temp.min + "\u00B0" + "F");
 
-        forecastCard.append(forecastDate, forecastTemp, forecastHumidity);
+        var forecastHumidity = $("<p>").text("Humidity: " + cityData.daily[i].humidity + "%");
+
+        forecastCard.append(forecastDate, forecastHigh, forecastLow, forecastHumidity);
     }
 
 });
