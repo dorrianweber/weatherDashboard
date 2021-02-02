@@ -29,10 +29,17 @@ $("#searchBtn").click(function (){
         
         else {
             // Adds city to list of searched cities
-            $("#city-search").append($("<button>").text(cityName + ", " + data.sys.country).addClass("city-list").attr('id', 'searchedCity'));
+            $("#city-search").append($("<button>").text(cityName + ", " + data.sys.country).addClass("city-list row").attr('id', 'searchedCity'));
 
             // Updates header for current weather section
             $("#today-city-date").text(cityName + ", " + data.sys.country + " " + currentTime);
+
+            // Adds icon for current weather conditions
+            var iconCode = data.weather[0].icon;
+
+            var weatherIcon = $("<img>").attr("src", "https://openweathermap.org/img/wn/" + iconCode + "@2x.png");
+
+            $("#today-city-date").append(weatherIcon);
 
             // Populates current temperature
             $("#temp").text("Temperature: " + data.main.temp + "\u00B0" + "F");
