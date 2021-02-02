@@ -19,7 +19,7 @@
     white-space: pre;
 }
 
-#forecast {
+#forecast-section {
     height: 40%;
     border: black solid 2px;
     padding: 20px;
@@ -32,4 +32,8 @@ input {
 .city-list {
     border: black solid 2px;
     padding: 10px;
+}
+
+.float-right {
+    padding: 0px;
 }
