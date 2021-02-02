@@ -1,23 +1,21 @@
-var searchBtn = $("#searchBtn");
-var searchBar = $("input");
-
 var currentTime = moment().format("MM/DD/YY");
 var cityName = "";
 var cityLat = "";
 var cityLon = "";
 
 // What happens when you click on the search button?
-$(searchBtn).click(function (){
+$("#searchBtn").click(function (){
 
     // Sets cityName variable to whatever you typed in the search bar
-    cityName = searchBar.val();
+    cityName = $("input").val();
 
     // API call for current weather
-    fetch('http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=575fa6288040420c3c839c30a54f62de', {})
+    fetch('http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=575fa6288040420c3c839c30a54f62de')
 
     .then(function (response) {
         return response.json();
     })
+
     .then(function (data) {
         console.log(data);
 
@@ -40,7 +38,7 @@ $(searchBtn).click(function (){
         cityLon = data.coord.lon;
 
         // Second API call for more information needed for 5-day forecast
-        fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + cityLat + '&lon=' + cityLon + '&units=imperial&exclude=minutely&appid=575fa6288040420c3c839c30a54f62de', {})
+        fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + cityLat + '&lon=' + cityLon + '&units=imperial&exclude=minutely&appid=575fa6288040420c3c839c30a54f62de')
 
         .then(function (response) {
             return response.json();
@@ -71,12 +69,12 @@ $(searchBtn).click(function (){
 
                 var forecastDate = $("<h4>").text(moment().add(i, 'days').format("MM/DD/YY"));
                 
-                var forecastTemp = $("<p>").text("Temperature: ");
+                var forecastTemp = $("<p>").text("Temperature: old");
 
-                var forecastHumidity = $("<p>").text("Humidity: ");
+                var forecastHumidity = $("<p>").text("Humidity: old");
 
                 forecastCard.append(forecastDate, forecastTemp, forecastHumidity);
-            }
+            };
             
         });
 
@@ -84,10 +82,9 @@ $(searchBtn).click(function (){
 
 });
 
-
 // What happens when you click on a city that you have already searched for?
-
 $("body").on("click", ".city-list", function(){
+
     var searchedCity = $(this).text().split(",")[0];
     var cityData = JSON.parse(localStorage.getItem(searchedCity));
 
@@ -108,9 +105,26 @@ $("body").on("click", ".city-list", function(){
     // Populates current UV Index
     $("#uv").text("UV Index: " + cityData.uvi);
 
+    // .................................................................................................
+
     // Forecast section...
 
-    // 
+    // Clears forecast section before adding cards
+    $("#forecast").empty();
 
+    // This for-loop adds a card with weather data for the next 5 days in the forecast section
+    for (var i = 1; i < 6; i++) {
+        var forecastCard = $("<div>").addClass("card col");
+
+        $("#forecast").append(forecastCard);
+
+        var forecastDate = $("<h4>").text(moment().add(i, 'days').format("MM/DD/YY"));
+        
+        var forecastTemp = $("<p>").text("Temperature: new");
+
+        var forecastHumidity = $("<p>").text("Humidity: new");
+
+        forecastCard.append(forecastDate, forecastTemp, forecastHumidity);
+    }
 
 });
