@@ -12,7 +12,7 @@ $("#searchBtn").click(function (){
     cityName = $("input").val();
 
     // API call for current weather
-    fetch('http://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=575fa6288040420c3c839c30a54f62de')
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&units=imperial&appid=575fa6288040420c3c839c30a54f62de')
 
     .then(function (response) {
         return response.json();
