@@ -1,7 +1,7 @@
 var searchBtn = $("#searchBtn");
 var searchBar = $("input");
 
-var currentTime = moment().format("MM/DD/YY, LT");
+var currentTime = moment().format("MM/DD/YY");
 var cityName = "";
 var cityLat = "";
 var cityLon = "";
@@ -39,6 +39,7 @@ $(searchBtn).click(function (){
         cityLat = data.coord.lat;
         cityLon = data.coord.lon;
 
+        // Second API call for more information needed for 5-day forecast
         fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + cityLat + '&lon=' + cityLon + '&units=imperial&exclude=minutely&appid=575fa6288040420c3c839c30a54f62de', {})
 
         .then(function (response) {
@@ -50,6 +51,7 @@ $(searchBtn).click(function (){
             // Populates current UV Index
             $("#uv").text("UV Index: " + forecast.daily[0].uvi);
             
+            // Adds UV Index data to object in local storage
             data = {
                 ...data,
                 uvi: forecast.daily[0].uvi
@@ -58,6 +60,10 @@ $(searchBtn).click(function (){
             // Saves weather data for city in local storage
             localStorage.setItem(cityName, JSON.stringify(data));
 
+            // Clears forecast section before adding cards
+            $("#forecast").empty();
+
+            // This for-loop adds a card with weather data for the next 5 days in the forecast section
             for (var i = 1; i < 6; i++) {
                 var forecastCard = $("<div>").addClass("card col");
 
@@ -70,11 +76,9 @@ $(searchBtn).click(function (){
                 var forecastHumidity = $("<p>").text("Humidity: ");
 
                 forecastCard.append(forecastDate, forecastTemp, forecastHumidity);
-                // , forecastTemp, forecastHumidity);
             }
             
         });
-
 
     });
 
@@ -85,12 +89,11 @@ $(searchBtn).click(function (){
 
 $("body").on("click", ".city-list", function(){
     var searchedCity = $(this).text().split(",")[0];
-
     var cityData = JSON.parse(localStorage.getItem(searchedCity));
 
-    console.log(cityData);
-
-    // Updates header for current weather section
+    // Current weather section...
+    
+    // Updates header
     $("#today-city-date").text(cityData.name + ", " + cityData.sys.country + " " + currentTime);
 
     // Populates current temperature
@@ -104,4 +107,10 @@ $("body").on("click", ".city-list", function(){
 
     // Populates current UV Index
     $("#uv").text("UV Index: " + cityData.uvi);
+
+    // Forecast section...
+
+    // 
+
+
 });
