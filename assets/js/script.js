@@ -114,6 +114,10 @@ $("#searchBtn").click(function (){
 
                     $("#forecast").append(forecastCard);
 
+                    var iconCode = forecast.daily[i].weather[0].icon;
+
+                    var forecastIcon = $("<img>").attr("src", "https://openweathermap.org/img/wn/" + iconCode + "@2x.png");
+
                     var forecastDate = $("<h4>").text(moment().add(i, 'days').format("MM/DD/YY"));
                     
                     var forecastHigh = $("<p>").text("High: " + forecast.daily[i].temp.max + "\u00B0" + "F");
@@ -122,7 +126,7 @@ $("#searchBtn").click(function (){
 
                     var forecastHumidity = $("<p>").text("Humidity: " + forecast.daily[i].humidity + "%");
 
-                    forecastCard.append(forecastDate, forecastHigh, forecastLow, forecastHumidity);
+                    forecastCard.append(forecastDate, forecastIcon, forecastHigh, forecastLow, forecastHumidity);
                 };
             });
         };
@@ -139,6 +143,13 @@ $("body").on("click", ".city-list", function(){
     
     // Updates header
     $("#today-city-date").text(cityData.name + ", " + cityData.sys.country + " " + currentTime);
+
+    // Adds icon for current weather conditions
+    var iconCode = cityData.weather[0].icon;
+
+    var weatherIcon = $("<img>").attr("src", "https://openweathermap.org/img/wn/" + iconCode + "@2x.png");
+
+    $("#today-city-date").append(weatherIcon);
 
     // Populates current temperature
     $("#temp").text("Temperature: " + cityData.main.temp + "\u00B0" + "F");
@@ -194,6 +205,10 @@ $("body").on("click", ".city-list", function(){
         var forecastCard = $("<div>").addClass("card col");
 
         $("#forecast").append(forecastCard);
+        
+        var iconCode = cityData.daily[i].weather[0].icon;
+
+        var forecastIcon = $("<img>").attr("src", "https://openweathermap.org/img/wn/" + iconCode + "@2x.png");
 
         var forecastDate = $("<h4>").text(moment().add(i, 'days').format("MM/DD/YY"));
                     
@@ -203,7 +218,7 @@ $("body").on("click", ".city-list", function(){
 
         var forecastHumidity = $("<p>").text("Humidity: " + cityData.daily[i].humidity + "%");
 
-        forecastCard.append(forecastDate, forecastHigh, forecastLow, forecastHumidity);
+        forecastCard.append(forecastDate, forecastIcon, forecastHigh, forecastLow, forecastHumidity);
     }
 
 });
